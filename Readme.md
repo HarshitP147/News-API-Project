@@ -13,6 +13,6 @@ The styling is mostly done using BootStrap CSS.
 This is the basic version of project.  
 In near future, I will add different queries for news and headlines for different countries and in different languages.
 
-### All suggestions and help from your side will always be welcome!!
+### All suggestions and help from your side will be welcome!!
 
 ## Thank you!
