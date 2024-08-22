@@ -1,11 +1,25 @@
 'use strict'
 
-// object api. Seach query parameters will be added later
+// import { config } from "dotenv";
+
+// config();
+
+// const api = {
+//     "apiKey": 'c69de3c808454aa38f7cb9895f385679',
+//     "baseUrl": 'https://newsapi.org/v2/',
+//     "sampleUrl": 'https://newsapi.org/v2/top-headlines?apiKey=c69de3c808454aa38f7cb9895f385679&country=in'
+// }
+// const api = {
+//     "apiKey": process.env.VITE_NEWS_API_KEY,
+//     'baseUrl': process.env.VITE_NEWS_BASE_URL,
+//     'sampleUrl': process.env.VITE_NEWS_SAMPLE_URL
+// }
 const api = {
-    "apiKey": 'c69de3c808454aa38f7cb9895f385679',
-    "baseUrl": 'https://newsapi.org/v2/',
-    "sampleUrl": 'https://newsapi.org/v2/top-headlines?apiKey=c69de3c808454aa38f7cb9895f385679&country=in'
+    'apiKey': import.meta.env.VITE_NEWS_API_KEY,
+    'baseUrl': import.meta.env.VITE_NEWS_BASE_URL,
+    'sampleUrl': import.meta.env.VITE_NEWS_SAMPLE_URL
 }
+
 
 
 // all DOM objects selected here
@@ -82,25 +96,21 @@ let addCards = function (x) {
 
     // putting the card inside the col element
     col.appendChild(card);
-    // now adding the full news card col into the main row 
+    // now adding the full news card col into the main row
     mainArea.appendChild(col);
 }
 
 // function to put the news inside the card
-let putNews = function (x,news) {
-    let img = document.getElementById(`newsImg${x}`);
+let putNews = function (x, news) {
     let title = document.getElementById(`nTte${x}`);
-    let content = document.getElementById(`nCont${x}`);
-    // let href = document.getElementById(`nMore${x}`);
-    let href = document.getElementById(`nMore${x}`);
+    let readMore = document.getElementById(`nMore${x}`);
     let author = document.getElementById(`source${x}`);
 
-    img.setAttribute("src", news['urlToImage']);
-    // title.innerText = news['title'];
     title.innerText = news['title'];
-    content.innerText = news['description'];
-    href.setAttribute("src", news['url']);
-    author.innerText = news['source']['name'];
+    readMore.setAttribute('href', news.url);
+
+    // href.setAttribute("src", news['url']);
+    author.innerText = new Date(news['publishedAt']).toDateString();
 
 }
 
@@ -125,7 +135,7 @@ btn.addEventListener("click", () => {
                 let news = articles[i];
 
                 // after adding cards we now put the news inside
-                putNews(i,news);
+                putNews(i, news);
 
 
             }
